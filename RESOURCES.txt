@@ -1,0 +1,1 @@
+Using an item's ASIN to locate it on the Amazon website - http://archive.oreilly.com/pub/h/387 (seems to work okay)
