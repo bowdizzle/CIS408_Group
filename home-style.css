@@ -1,0 +1,111 @@
+body{
+
+  background-color: rgba(220,220,220, 0.8);
+
+}
+
+
+#site-header{
+
+  background-color: rgba(50, 100, 255, 0.7);
+  box-shadow: 0px 0px 2px 3px grey;
+  padding: 0.6em;
+
+  font-family: 'Exo 2', sans-serif;
+  border-radius: 0;
+
+}
+
+#site-title{
+
+  text-align: center;
+  text-shadow: 1px 1px 0px black;
+
+}
+
+#site-title a:hover{
+
+  text-shadow: 2px 2px 1px black;
+
+}
+
+#site-title a{
+
+  color: white;
+  text-decoration: none;
+
+}
+
+#feed-block{
+
+}
+
+.user-post{
+
+  background-color: white;
+  box-shadow: 1px 1px 1px grey;
+
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 2px;
+  padding-bottom: 5px;
+
+  margin-bottom: 10px;
+
+}
+
+.post-msg{
+
+  padding-top: 10px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+
+  font-family: monospace;
+
+}
+
+.post-tag{
+
+  padding-top: 2px;
+  padding-right: 5px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+
+  font-family: "Exo 2";
+
+}
+
+#submit-post-btn, #sign-in-btn, #sign-up-btn{
+
+  width:100%;
+  background-color: rgba(50, 100, 255, 0.7);
+
+  border: none;
+  margin-bottom: 15px;
+  box-shadow: 1px 1px 1px 1px grey;
+
+  padding: 5px;
+
+  color:white;
+  font-family: "Exo 2", sans-serif;
+  font-size: 1.5em;
+  text-shadow: 1px 1px 0px black;
+
+}
+
+#submit-form{
+
+  display: none;
+
+  width:100%;
+  background-color: white;
+  box-shadow: 1px 1px 1px 1px grey;
+  margin-bottom: 15px;
+
+  font-family: "Exo 2", sans-serif;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+
+}
