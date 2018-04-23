@@ -19,11 +19,17 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="home-style.css">
 </head>
 <body>
 
+  <div class='jumbotron' id='site-header'>
+    <h1 id='site-title'> <a href=index.html>NAME TBD </a></h1>
+  </div>
+
 	<div class="container">
-		<form action="/final/login.php" method="post" role="form">
+		<form action="login.php" method="post" role="form">
 			<div class="form-group">
 				<label for="username">Username:</label>
 				<input type="text" class="form-control" id="username" name="username" required>
@@ -34,46 +40,51 @@
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
+
+			<?php
+
+			$ini = parse_ini_file("config.ini");
+
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				
+				// gets info user submitted
+				$username = $_POST["username"];
+				$password = $_POST["password"];
+			
+				$mysqli = new mysqli($ini["db_ip"], $ini["db_user"], $ini["db_password"]);
+				$mysqli->set_charset("utf8mb4");
+				$mysqli->select_db($ini["db_name"]);
+			
+				// prepare statement to grab hashed password for given user
+				$stmt = $mysqli->prepare("SELECT password FROM accounts WHERE username = ?");
+				$stmt->bind_param('s', $username);
+				$stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+				$result = $stmt->get_result();
+			
+				// fetch results and put them into an array
+				$data = array();
+			
+				while ($row = $result->fetch_assoc()) {
+					$data[] = $row;
+				}
+			
+				// TODO: this is temporary to see if password checking works
+				// check password against stored password
+				$stored_password = $data[0]["password"];
+				if (password_verify($password, $stored_password)) {
+					echo "Succesfully logged in!";
+				} else {
+					echo "Incorrect log in";
+				}
+
+				// clean up
+				$stmt->free_result();
+				$stmt->close();
+				$mysqli->close();
+			}
+
+ 			?>
 	</div>
-
-	<?php 
-
-	// gets info user submitted
-	$username = $_POST["username"];
-	$password = $_POST["password"];
-
-	$mysqli = new mysqli("127.0.0.1", "DB_USER", "DB_PASSWORD");
-	$mysqli->set_charset("utf8mb4");
-	$mysqli->select_db("finalProject");
-
-	// prepare statement to grab hashed password for given user
-	$stmt = $mysqli->prepare("SELECT password FROM accounts WHERE username = ?");
-	$stmt->bind_param('s', $username);
-	$stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
-	$result = $stmt->get_result();
-
-	// fetch results and put them into an array
-	$data = array();
-
-	while ($row = $result->fetch_assoc()) {
-		$data[] = $row;
-	}
-	
-	// TODO: this is temporary to see if password checking works
-	// check password against stored password
-	$stored_password = $data[0]["password"];
-	if (password_verify($password, $stored_password)) {
-		echo "Succesfully logged in!";
-	} else {
-		echo "Incorrect log in";
-	}
-
-	// clean up
-	$stmt->free_result();
-	$stmt->close();
-	$mysqli->close();
-
-	 ?>
 
 </body>
 </html>

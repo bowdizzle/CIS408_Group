@@ -19,15 +19,23 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="home-style.css">
 </head>
 <body>
 
+	<div class='jumbotron' id='site-header'>
+    	<h1 id='site-title'> <a href=index.html>NAME TBD </a></h1>
+	</div>
+	
 	<div class="container">
 		
 		<?php
 
+		$ini = parse_ini_file("config.ini");
+
 		// set up connection and statement to prevent sql injection
-		$mysqli = new mysqli("127.0.0.1", "DB_USER", "DB_PASSWORD");
+		$mysqli = new mysqli($ini["db_ip"], $ini["db_user"], $ini["db_password"]);
 		$mysqli->set_charset("utf8mb4");
 
 		if (mysqli_connect_errno()) {
@@ -36,7 +44,7 @@
 		}
 
 		// query strings
-		$db_create = "CREATE DATABASE IF NOT EXISTS finalProject";
+		$db_create = "CREATE DATABASE IF NOT EXISTS " . $ini["db_name"];
 		$table_create = "CREATE TABLE IF NOT EXISTS accounts (
 							id INT(10) AUTO_INCREMENT,
 							username VARCHAR(36) NOT NULL,
@@ -46,7 +54,7 @@
 
 		// creates database if it doesnt exist
 		$mysqli->query($db_create);
-		$mysqli->select_db("finalProject");
+		$mysqli->select_db($ini["db_name"]);
 
 		// creates table if it doesnt exist
 		$mysqli->query($table_create);
@@ -58,7 +66,10 @@
 		// TODO: check for already exisiting users
 		$stmt = $mysqli->prepare("INSERT INTO accounts (username, password) VALUES (?,?)");
 		$stmt->bind_param('ss', $username, $password);
-		$stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+		
+		if ($stmt->execute()) {
+			echo "You have succesfully registered as " . $username . "!";
+		}
 
 		// clean up
 		$stmt->free_result();
@@ -68,6 +79,8 @@
 		 ?>
 
 	</div>
+	
+	<php>
 
 </body>
 </html>

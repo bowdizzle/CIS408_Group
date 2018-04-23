@@ -19,11 +19,17 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="home-style.css">
 </head>
 <body>
 
+	<div class='jumbotron' id='site-header'>
+    	<h1 id='site-title'> <a href=index.html>NAME TBD </a></h1>
+ 	</div>
+
 	<div class="container">
-		<form action="/final/register_action.php" method="post" role="form">
+		<form action="register_action.php" method="post" role="form">
 			<div class="form-group">
 				<label for="username">Username:</label>
 				<input type="text" class="form-control" id="username" name="username" required>
