@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,19 @@
   </div>
 
 	<div class="container">
+
+		<div>
+			<?php 
+
+			if ($_SESSION["username"] != null) {
+				echo "Currently signed in as {$_SESSION["username"]}";
+			} else {
+				echo "Not signed in";
+			}
+
+			?>
+		</div>
+		
 		<form action="login.php" method="post" role="form">
 			<div class="form-group">
 				<label for="username">Username:</label>
@@ -73,6 +87,7 @@
 				$stored_password = $data[0]["password"];
 				if (password_verify($password, $stored_password)) {
 					echo "Succesfully logged in!";
+					$_SESSION['username'] = $username;
 				} else {
 					echo "Incorrect log in";
 				}
