@@ -49,7 +49,8 @@
 							id INT(10) AUTO_INCREMENT,
 							username VARCHAR(36) NOT NULL,
 							password VARCHAR(255) NOT NULL,
-							PRIMARY KEY (id)
+							PRIMARY KEY (id),
+							UNIQUE (username)
 						)";
 
 		// creates database if it doesnt exist
@@ -63,12 +64,13 @@
 		$username = $_POST["username"];
 		$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-		// TODO: check for already exisiting users
 		$stmt = $mysqli->prepare("INSERT INTO accounts (username, password) VALUES (?,?)");
 		$stmt->bind_param('ss', $username, $password);
 		
 		if ($stmt->execute()) {
 			echo "You have succesfully registered as " . $username . "!";
+		} else {
+			echo "Username has been taken, please try another username.";
 		}
 
 		// clean up
