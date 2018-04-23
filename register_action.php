@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>CSU OpenBoard - Register</title>
+	<title>Register</title>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -19,15 +19,23 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<link rel="stylesheet" href="home-style.css">
 </head>
 <body>
 
+	<div class='jumbotron' id='site-header'>
+    	<h1 id='site-title'> <a href=index.html>NAME TBD </a></h1>
+	</div>
+	
 	<div class="container">
 		
 		<?php
 
+		$ini = parse_ini_file("config.ini");
+
 		// set up connection and statement to prevent sql injection
-		$mysqli = new mysqli("127.0.0.1", "DB_USER", "DB_PASSWORD");
+		$mysqli = new mysqli($ini["db_ip"], $ini["db_user"], $ini["db_password"]);
 		$mysqli->set_charset("utf8mb4");
 
 		if (mysqli_connect_errno()) {
@@ -36,17 +44,18 @@
 		}
 
 		// query strings
-		$db_create = "CREATE DATABASE IF NOT EXISTS finalProject";
+		$db_create = "CREATE DATABASE IF NOT EXISTS " . $ini["db_name"];
 		$table_create = "CREATE TABLE IF NOT EXISTS accounts (
 							id INT(10) AUTO_INCREMENT,
 							username VARCHAR(36) NOT NULL,
 							password VARCHAR(255) NOT NULL,
-							PRIMARY KEY (id)
+							PRIMARY KEY (id),
+							UNIQUE (username)
 						)";
 
 		// creates database if it doesnt exist
 		$mysqli->query($db_create);
-		$mysqli->select_db("finalProject");
+		$mysqli->select_db($ini["db_name"]);
 
 		// creates table if it doesnt exist
 		$mysqli->query($table_create);
@@ -55,10 +64,14 @@
 		$username = $_POST["username"];
 		$password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-		// TODO: check for already exisiting users
 		$stmt = $mysqli->prepare("INSERT INTO accounts (username, password) VALUES (?,?)");
 		$stmt->bind_param('ss', $username, $password);
-		$stmt->execute() or trigger_error($stmt->error, E_USER_ERROR);
+		
+		if ($stmt->execute()) {
+			echo "You have succesfully registered as " . $username . "!";
+		} else {
+			echo "Username has been taken, please try another username.";
+		}
 
 		// clean up
 		$stmt->free_result();
@@ -68,6 +81,8 @@
 		 ?>
 
 	</div>
+	
+	<php>
 
 </body>
 </html>
