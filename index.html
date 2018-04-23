@@ -2,7 +2,7 @@
 
 <html>
 <head>
-
+<title>Homepage</title>
 <!-- Bootstrap CSS CDN -->
 <link rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
@@ -38,7 +38,7 @@
 
       <button id="submit-post-btn" onclick="showSubmitForm()">SUBMIT NEW POST</button>
 
-      <form id="submit-form" action="submitPost.php">
+      <form id="submit-form" action="submit_post.php" method="post">
         <p><b>Message:</b></p>
         <textarea name="msg" rows="5" cols="40" maxlength="200"></textarea>
         <br>
