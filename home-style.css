@@ -76,7 +76,7 @@ body {
 
 }
 
-#submit-post-btn, #sign-in-btn, #sign-out-btn, #username {
+#submit-post-btn, #sign-in-btn, #sign-out-btn, #register-btn, #user-display {
 
   width:100%;
   background-color: rgba(50, 100, 255, 0.7);

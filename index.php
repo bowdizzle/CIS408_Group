@@ -1,30 +1,30 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
-
 <html>
 <head>
-<title>Homepage</title>
-<!-- Bootstrap CSS CDN -->
-<link rel="stylesheet"
-  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-  crossorigin="anonymous">
 
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+  <title>Homepage</title>
+
+  <!-- Bootstrap CSS CDN -->
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  
+  <!-- Font -->
+  <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
+  
+  <!-- Customized Style -->
+  <link rel = 'stylesheet' href = 'home-style.css'>
+
+</head>
 
 <script type="text/javascript">
-
   function showSubmitForm(){
     document.getElementById("submit-post-btn").style.display="none";
     document.getElementById("submit-form").style.display = "block";
   }
-
 </script>
-
-<link rel = 'stylesheet' href = 'home-style.css'>
-
-</head>
 
 <body>
 <div class = "container-fluid">
@@ -76,11 +76,11 @@
       <?php 
 
       if ($_SESSION["username"] != null) {
-        echo '<button id="username" class="btn">Signed in as ' . $_SESSION["username"] . '</button>';
+        echo '<button id="user-display" class="btn">Signed in as ' . $_SESSION["username"] . '</button>';
         echo '<button id="sign-out-btn" class="btn" onclick="location.href=\'signout.php\';">Sign out</button>';
       } else {
         echo '<button id="sign-in-btn" class="btn" onclick="location.href=\'login.php\';">Sign in</button>';
-        echo '<button id="sign-up-btn" class="btn" onclick="location.href=\'register.php\';">Sign Up</button>'; 
+        echo '<button id="register-btn" class="btn" onclick="location.href=\'register.php\';">Sign Up</button>'; 
       }
 
       ?>
