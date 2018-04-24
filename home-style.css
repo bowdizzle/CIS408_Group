@@ -1,11 +1,11 @@
-body{
+body {
 
   background-color: rgba(220,220,220, 0.8);
 
 }
 
 
-#site-header{
+#site-header {
 
   background-color: rgba(50, 100, 255, 0.7);
   box-shadow: 0px 0px 2px 3px grey;
@@ -16,31 +16,31 @@ body{
 
 }
 
-#site-title{
+#site-title {
 
   text-align: center;
   text-shadow: 1px 1px 0px black;
 
 }
 
-#site-title a:hover{
+#site-title a:hover {
 
   text-shadow: 2px 2px 1px black;
 
 }
 
-#site-title a{
+#site-title a {
 
   color: white;
   text-decoration: none;
 
 }
 
-#feed-block{
+#feed-block {
 
 }
 
-.user-post{
+.user-post {
 
   background-color: white;
   box-shadow: 1px 1px 1px grey;
@@ -54,7 +54,7 @@ body{
 
 }
 
-.post-msg{
+.post-msg {
 
   padding-top: 10px;
   padding-right: 5px;
@@ -65,7 +65,7 @@ body{
 
 }
 
-.post-tag{
+.post-tag {
 
   padding-top: 2px;
   padding-right: 5px;
@@ -76,7 +76,7 @@ body{
 
 }
 
-#submit-post-btn, #sign-in-btn, #sign-up-btn{
+#submit-post-btn, #sign-in-btn, #sign-out-btn, #username {
 
   width:100%;
   background-color: rgba(50, 100, 255, 0.7);
@@ -94,7 +94,7 @@ body{
 
 }
 
-#submit-form{
+#submit-form {
 
   display: none;
 

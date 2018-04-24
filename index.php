@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 
 <html>
@@ -72,8 +73,18 @@
 
     <div class = "col-sm-0 col-md-3" id="right-margin">
 
-      <button id="sign-in-btn" onclick="location.href='login.php';">Sign in</button>
-      <button id="sign-up-btn" onclick="location.href='register.php';">Sign Up</button>
+      <?php 
+
+      if ($_SESSION["username"] != null) {
+        echo '<button id="username" class="btn">Signed in as ' . $_SESSION["username"] . '</button>';
+        echo '<button id="sign-out-btn" class="btn" onclick="location.href=\'signout.php\';">Sign out</button>';
+      } else {
+        echo '<button id="sign-in-btn" class="btn" onclick="location.href=\'login.php\';">Sign in</button>';
+        echo '<button id="sign-up-btn" class="btn" onclick="location.href=\'register.php\';">Sign Up</button>'; 
+      }
+
+      ?>
+      
 
     </div>
 
