@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-	<title>Post message</title>
+	<title>Sign Out</title>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
@@ -35,7 +35,8 @@
 		<?php 
 
 		if ($_SESSION["username"] != null) {
-			echo "Currently signed in as {$_SESSION["username"]}";
+			session_destroy();
+			echo "You have succesfully signed out!";
 		} else {
 			echo "Not signed in";
 		}

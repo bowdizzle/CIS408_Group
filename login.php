@@ -26,22 +26,10 @@
 <body>
 
   <div class='jumbotron' id='site-header'>
-    <h1 id='site-title'> <a href=index.html>NAME TBD </a></h1>
+    <h1 id='site-title'> <a href=index.php>NAME TBD </a></h1>
   </div>
 
 	<div class="container">
-
-		<div>
-			<?php 
-
-			if ($_SESSION["username"] != null) {
-				echo "Currently signed in as {$_SESSION["username"]}";
-			} else {
-				echo "Not signed in";
-			}
-
-			?>
-		</div>
 		
 		<form action="login.php" method="post" role="form">
 			<div class="form-group">
