@@ -22,6 +22,10 @@
   <!-- Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+  <!--ANGULAR-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+  </script>
+
   <link rel="stylesheet" href="home-style.css">
 
 </head>
@@ -34,7 +38,7 @@
 </script>
 
 <body>
-<div class = "container-fluid">
+<div ng-app="" class = "container-fluid">
 
   <div class='jumbotron' id='site-header'>
     <h1 id='site-title'> <a href=#>NAME TBD </a></h1>
@@ -49,9 +53,11 @@
       <form id="submit-form" action="submit_post.php" method="post">
         <p><b>Message:</b></p>
         <div class="container-fluid">
-          <textarea class="form-control" name="msg" rows="5" cols="40" maxlength="200"></textarea>
+          <textarea class="form-control" name="msg" rows="5" cols="40"
+            maxlength="200" ng-model="sub_msg"></textarea>
+            <p>{{(sub_msg.length+0)+"/200"}}
         </div>
-        
+
         <br>
         <hr>
         <button class="btn btn-primary" type="submit"> Submit Post </button>
@@ -83,18 +89,18 @@
 
     <div class = "col-sm-0 col-md-3" id="right-margin">
 
-      <?php 
+      <?php
 
       if ($_SESSION["username"] != null) {
         echo '<button id="user-display" class="btn">Signed in as ' . $_SESSION["username"] . '</button>';
         echo '<button id="sign-out-btn" class="btn" onclick="location.href=\'signout.php\';">Sign out</button>';
       } else {
         echo '<button id="sign-in-btn" class="btn" onclick="location.href=\'login.php\';">Sign in</button>';
-        echo '<button id="register-btn" class="btn" onclick="location.href=\'register.php\';">Sign Up</button>'; 
+        echo '<button id="register-btn" class="btn" onclick="location.href=\'register.php\';">Sign Up</button>';
       }
 
       ?>
-      
+
 
     </div>
 
