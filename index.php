@@ -17,8 +17,12 @@
 
   <!-- Font and Style -->
   <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
-  <link rel="stylesheet" href="home-style.css">
 
+  <!--ANGULAR-->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js">
+  </script>
+
+  <link rel="stylesheet" href="home-style.css">
   <title>Homepage</title>
 
 </head>
@@ -31,7 +35,6 @@
   }
 
   $(function() {
-
     $('#submit-form').submit(function(event) {
 
       event.preventDefault();
@@ -59,7 +62,7 @@
 
 <body>
 
-  <div class = "container-fluid">
+  <div ng-app="" class = "container-fluid">
   
     <div class='jumbotron' id='site-header'>
       <h1 id='site-title'> <a href=#>NAME TBD </a></h1>
@@ -78,9 +81,10 @@
         <form id="submit-form" action="submit_post.php" method="post">
           <p><b>Message:</b></p>
           <div class="container-fluid">
-            <textarea id="message-text" class="form-control" name="msg" rows="5" cols="40" maxlength="200"></textarea>
+            <textarea class="form-control" name="msg" rows="5" cols="40" maxlength="200" ng-model="sub_msg"></textarea>
+            <br>
+            <p>{{(sub_msg.length+0)+"/200"}}
           </div>
-          <br> <hr>
           <button class="btn btn-primary" type="submit"> Submit Post </button>
         </form>
       </div>
