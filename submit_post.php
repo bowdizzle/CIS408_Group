@@ -1,47 +1,57 @@
-<?php session_start(); ?>
+<?php 
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+	session_start();
 
-	<title>Post message</title>
+	if ($_SESSION["username"] == null) {
+		echo "Please sign in to post a message";
+		exit();
+	}
 
-	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	if ($_POST["msg"] == null) {
+		echo "Please enter a message";
+		exit();
+	}
 
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	<!-- Optional theme -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<link rel="stylesheet" href="home-style.css">
-
-</head>
-<body>
-
-	<div class='jumbotron' id='site-header'>
-	  <h1 id='site-title'> <a href=index.php>NAME TBD </a></h1>
-	</div>
+	$ini = parse_ini_file("config.ini");
 	
-	<div class="container">
-		<?php 
+	// attempt connection to the database
+	$mysqli = new mysqli($ini["db_ip"], $ini["db_user"], $ini["db_password"]);
+	$mysqli->set_charset("utf8mb4");
+	$mysqli->select_db($ini["db_name"]);
 
-		if ($_SESSION["username"] != null) {
-			echo "Currently signed in as {$_SESSION["username"]}";
-		} else {
-			echo "Not signed in";
-		}
+	
+	// create table if it does not exist
+	$table_create = "CREATE TABLE IF NOT EXISTS user_posts (
+	id INT(10) AUTO_INCREMENT,
+	username VARCHAR(36) NOT NULL,
+	message_text VARCHAR(210) NOT NULL,
+	message_timestamp TIMESTAMP,
+	PRIMARY KEY (id),
+	FOREIGN KEY (username) REFERENCES accounts (username)
+	)";
 
-		?>
-	</div>
+	if (!$mysqli->query($table_create)) {
+		echo mysqli_error($mysqli);
+	}
+	
+	
+	// insert message into database table
+	$username = $_SESSION["username"];
+	$message = $_POST["msg"];
+	
+	$stmt = $mysqli->prepare("INSERT INTO user_posts (username, message_text, message_timestamp) VALUES (?,?, CURRENT_TIMESTAMP)");
+	$stmt->bind_param('ss', $username, $message);
+	
+	if ($stmt->execute()) {
+		echo "Message posted sucessfully!";
+	} else {
+		echo "There was an error posting message";
+	}
+	
+	// clean up
+	$stmt->free_result();
+	$stmt->close();
+	$mysqli->close();
+	exit();
 
-</body>
-</html>
+?>
