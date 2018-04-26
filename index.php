@@ -35,6 +35,44 @@
     document.getElementById("submit-post-btn").style.display="none";
     document.getElementById("submit-form").style.display = "block";
   }
+  $(document).ready(function(){
+    jQuery.ajax({
+
+      type:"GET", url:"./loadPosts.php",
+
+    }).done(function(data){
+
+      post_list = JSON.parse(data);
+      var post_no = 0;
+
+      while(post_no < post_list.length){
+        post = post_list[post_no]
+        console.log(post);
+        var newPost = document.createElement("div");
+        newPost.className="user-post";
+
+        var m = document.createElement("p");
+        m.className="post-msg";
+        m.innerHTML=post.post_msg;
+
+        var tag =document.createElement("p");
+        tag.className="post-tag";
+        tag.innerHTML = post.user + " | " + post.post_time;
+
+        var breakline = document.createElement("hr");
+
+        newPost.append(m);
+        newPost.append(breakline);
+        newPost.append(tag);
+        document.getElementById("feed-block").append(newPost);
+
+        post_no++;
+
+      }
+    }).fail(function(){
+      console.log("FAILED TO LOAD POSTS from loadPosts.php");
+    });
+  });
 </script>
 
 <body>
