@@ -90,6 +90,8 @@
         url: 'submit_post.php',
         data: formData
       }).done(response => {
+
+        $('#message-content').val('');
         $('#message-alert').show();
         $('#message-alert').text(response);
         $("#message-alert").fadeTo(3000, 500).slideUp(500, function(){
@@ -121,7 +123,7 @@
         <form id="submit-form" action="submit_post.php" method="post">
           <p><b>Message:</b></p>
           <div class="container-fluid">
-            <textarea class="form-control" name="msg" rows="5" cols="40" maxlength="200" ng-model="sub_msg"></textarea>
+            <textarea id="message-content" class="form-control" name="msg" rows="5" cols="40" maxlength="200" ng-model="sub_msg"></textarea>
             <br>
             <p>{{(sub_msg.length+0)+"/200"}}
           </div>
