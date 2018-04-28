@@ -28,37 +28,44 @@
 </head>
 
 <script type="text/javascript">
+
   function showSubmitForm() {
     document.getElementById("submit-post-btn").style.display = "none";
     document.getElementById("submit-form").style.display = "block";
   }
 
-  //When page loads, load posts
-  $(document).ready(function(){
-    jQuery.ajax({
+  // Function to call post loading
+  function loadPosts() {
 
-      type:"GET", url:"./loadPosts.php",
+  }
 
-    }).done(function(data){
+  // When page loads, load posts
+  $(document).ready(function() {
+    $.ajax({
 
-      post_list = JSON.parse(data);
-      var post_no = 0;
+      type: "GET", 
+      url: "./loadPosts.php"
 
-      while(post_no < post_list.length){
-        post = post_list[post_no]
-        console.log(post);
-        var newPost = document.createElement("div");
-        newPost.className="user-post";
+    }).done(function(data) {
+		
+      let post_list = JSON.parse(data);
+      let post_no = 0;
 
-        var m = document.createElement("p");
-        m.className="post-msg";
-        m.innerHTML=post.post_msg;
+      while(post_no < post_list.length) {
 
-        var tag =document.createElement("p");
-        tag.className="post-tag";
-        tag.innerHTML = post.user + " | " + post.post_time;
+        let post = post_list[post_no]
+        let newPost = document.createElement("div");
+        newPost.className ="user-post";
 
-        var breakline = document.createElement("hr");
+        let m = document.createElement("p");
+        m.className = "post-msg";
+        m.innerHTML = post.message_text;
+
+        let tag = document.createElement("p");
+        tag.className = "post-tag";
+        tag.innerHTML = post.username + " | " + post.message_timestamp;
+
+        let breakline = document.createElement("hr");
 
         newPost.append(m);
         newPost.append(breakline);
@@ -73,6 +80,7 @@
     });
   });
 
+  // Saves a post to the database based on what is in the text area
   $(function() {
     $('#submit-form').submit(function(event) {
       event.preventDefault();
@@ -123,19 +131,6 @@
 
 
       <div id = "feed-block" class = "col-sm-12 col-md-6">
-
-        <div class="user-post" id="example-post">
-            <p class = "post-msg">This is an example of a post that a user can make.</p>
-            <hr>
-            <p class = "post-tag"><b>USERNAME</b> | 11:06 pm, Jan 5, 2009</p>
-        </div>
-
-
-        <div class="user-post" id="example-post">
-            <p class = "post-msg">This is an example of a post that a user can make.</p>
-            <hr>
-            <p class = "post-tag"><b>USERNAME</b> | 11:06 pm, Jan 5, 2009</p>
-        </div>
 
       </div>
 

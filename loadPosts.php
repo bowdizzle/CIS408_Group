@@ -6,7 +6,7 @@
 
   $mysql = new mysqli($ini['db_ip'], $ini['db_user'], $ini['db_password'], $ini['db_name']);
 
-  $result_posts = $mysql->query("Select * from posts order by post_time");
+  $result_posts = $mysql->query("SELECT * FROM user_posts ORDER BY message_timestamp DESC");
 
   $return_arr = [];
 
