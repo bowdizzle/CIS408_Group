@@ -29,33 +29,35 @@
 
 <script type="text/javascript">
 
+  let offset = 10;
+  let morePosts =  true;
+
   function showSubmitForm() {
     document.getElementById("submit-post-btn").style.display = "none";
     document.getElementById("submit-form").style.display = "block";
   }
 
   // Function to call post loading
-  function loadPosts() {
-
-  }
-
-  // When page loads, load posts
-  $(document).ready(function() {
+  function loadPosts(limit, offset) {
     $.ajax({
 
       type: "GET", 
-      url: "./loadPosts.php"
+      url: "./loadPosts.php",
+      data: {
+        limit: limit,
+        offset: offset
+      }
 
     }).done(function(data) {
 		
       let post_list = JSON.parse(data);
       let post_no = 0;
 
-      while(post_no < post_list.length) {
+      while (post_no < post_list.length) {
 
         let post = post_list[post_no]
         let newPost = document.createElement("div");
-        newPost.className ="user-post";
+        newPost.className = "user-post";
 
         let m = document.createElement("p");
         m.className = "post-msg";
@@ -75,9 +77,29 @@
         post_no++;
 
       }
+
+      if (post_list.length < limit) {
+        morePosts = false;
+      }
+
     }).fail(function(){
       console.log("FAILED TO LOAD POSTS from loadPosts.php");
     });
+  }
+
+  // When page loads, load posts
+  $(document).ready(function() {
+    loadPosts(10, 0);
+  });
+
+  // Check when user has scrolled to the bottom of the page
+  $(window).scroll(function() {
+    if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+      if (morePosts) {
+        loadPosts(10, offset);
+        offset = offset + 10;
+      }
+    }
   });
 
   // Saves a post to the database based on what is in the text area
@@ -98,6 +120,7 @@
             $("#message-alert").slideUp(500);
         });
       });
+      // location.reload();
     });
   });
 </script>
