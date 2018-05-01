@@ -8,6 +8,7 @@ $mysqli = new mysqli($ini["db_ip"], $ini["db_user"], $ini["db_password"]);
 $mysqli->set_charset("utf8mb4");
 
 if (mysqli_connect_errno()) {
+	echo 'There was an error connecting to the database...';
 	exit();
 }
 
