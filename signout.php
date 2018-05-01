@@ -30,13 +30,15 @@
 	<div class='jumbotron' id='site-header'>
 	  <h1 id='site-title'> <a href=index.php>NAME TBD </a></h1>
 	</div>
-	
+
 	<div class="container">
-		<?php 
+		<?php
 
 		if ($_SESSION["username"] != null) {
 			session_destroy();
 			echo "You have succesfully signed out!";
+			//Redirect to homepage after signout
+			header('Location: index.php');
 		} else {
 			echo "Not signed in";
 		}

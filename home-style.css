@@ -40,7 +40,16 @@ body {
 
 }
 
+@keyframes fadein{
+
+  from{opacity:0.0;}
+  to{opacity:1.0;}
+
+}
 .user-post {
+
+  animation-name: fadein;
+  animation-duration:1s;
 
   background-color: white;
   box-shadow: 1px 1px 1px grey;

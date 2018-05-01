@@ -56,11 +56,11 @@
  	</div>
 
 	<div class="container">
-		
+
 		<div id="message-alert" class="alert alert-dark alert-dismissable" role="alert" style="display: none;">
 		  Message alert!
 		</div>
-		
+
 		<form id="register-form" action="register_action.php" method="post" role="form">
 			<div class="form-group">
 				<label for="username">Username:</label>
