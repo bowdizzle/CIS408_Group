@@ -92,6 +92,8 @@ body {
   font-family: "Exo 2", sans-serif;
   font-size: 1.5em;
   text-shadow: 1px 1px 0px black;
+  white-space: normal;
+  word-wrap: break-word;
 
 }
 
