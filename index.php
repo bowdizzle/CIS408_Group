@@ -41,7 +41,7 @@
   function loadPosts(limit, offset) {
     $.ajax({
 
-      type: "GET", 
+      type: "GET",
       url: "./loadPosts.php",
       data: {
         limit: limit,
@@ -49,7 +49,7 @@
       }
 
     }).done(function(data) {
-		
+
       let post_list = JSON.parse(data);
       let post_no = 0;
 
@@ -142,25 +142,6 @@
     <div class = "row">
 
       <div class = "col-sm-0 col-md-3" id="left-margin">
-        <button class="btn" id="submit-post-btn" onclick="showSubmitForm()">Compose Message</button>
-        <form id="submit-form" action="submit_post.php" method="post">
-          <p><b>Message:</b></p>
-          <div class="container-fluid">
-            <textarea id="message-content" class="form-control" name="msg" rows="5" cols="40" maxlength="200" ng-model="sub_msg"></textarea>
-            <br>
-            <p>{{(sub_msg.length+0)+"/200"}}
-          </div>
-          <button class="btn btn-primary" type="submit"> Submit Post </button>
-        </form>
-      </div>
-
-
-      <div id = "feed-block" class = "col-sm-12 col-md-6">
-
-      </div>
-
-
-      <div class = "col-sm-0 col-md-3" id="right-margin">
 
         <?php
 
@@ -173,6 +154,31 @@
         }
 
         ?>
+
+        <hr>
+
+        <button class="btn" id="submit-post-btn" onclick="showSubmitForm()">Compose Message</button>
+        <form id="submit-form" action="submit_post.php" method="post">
+          <p><b>Message:</b></p>
+          <div class="container-fluid">
+            <textarea id="message-content" class="form-control" name="msg" rows="5" cols="40" maxlength="200" ng-model="sub_msg"></textarea>
+            <br>
+            <p>{{(sub_msg.length+0)+"/200"}}
+          </div>
+          <button class="btn btn-primary" type="submit"> Submit Post </button>
+        </form>
+
+        <hr>
+        
+      </div>
+
+
+      <div id = "feed-block" class = "col-sm-12 col-md-6">
+
+      </div>
+
+
+      <div class = "col-sm-0 col-md-3" id="right-margin">
 
       </div>
     </div>
