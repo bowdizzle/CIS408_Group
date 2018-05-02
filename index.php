@@ -65,7 +65,7 @@
 
         let tag = document.createElement("p");
         tag.className = "post-tag";
-        tag.innerHTML = post.username + " | " + post.message_timestamp;
+        tag.innerHTML = "<b>" + post.username + "</b> <br> " + post.message_timestamp;
 
         let breakline = document.createElement("hr");
 
@@ -133,7 +133,7 @@
     </div>
   <div ng-app="" class = "container-fluid">
 
-    
+
 
     <div id="message-alert" class="alert alert-dark alert-dismissable" role="alert" style="display: none;">
       Message alert!
@@ -170,7 +170,7 @@
         </form>
 
         <hr>
-        
+
       </div>
 
 
