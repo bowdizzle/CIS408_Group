@@ -52,7 +52,7 @@
 	</script>
 
 	<div class='jumbotron' id='site-header'>
-    	<h1 id='site-title'> <a href=index.php>NAME TBD</a></h1>
+    	<h1 id='site-title'> <a href=index.php>Vikespace</a></h1>
  	</div>
 
 	<div class="container">

@@ -43,7 +43,7 @@
 	$stmt->bind_param('ss', $username, $message);
 	
 	if ($stmt->execute()) {
-		echo "Message posted sucessfully!";
+		echo "Message posted sucessfully! <a href=\"index.php\" class=\"alert-link\">Click here to refresh the page</a>";
 	} else {
 		echo "There was an error posting message";
 	}

@@ -115,8 +115,8 @@
 
         $('#message-content').val('');
         $('#message-alert').show();
-        $('#message-alert').text(response);
-        $("#message-alert").fadeTo(3000, 500).slideUp(500, function(){
+        $('#message-alert').html(response);
+        $("#message-alert").fadeTo(5000, 500).slideUp(500, function(){
             $("#message-alert").slideUp(500);
         });
       });
@@ -127,12 +127,13 @@
 
 <body>
 
+
+  <div class='jumbotron position-sticky fixed-top' id='site-header'>
+      <h1 id='site-title'> <a href=#>Vikespace </a></h1>
+    </div>
   <div ng-app="" class = "container-fluid">
 
-    <div class='jumbotron' id='site-header'>
-      <h1 id='site-title'> <a href=#>NAME TBD </a></h1>
-    </div>
-
+    
 
     <div id="message-alert" class="alert alert-dark alert-dismissable" role="alert" style="display: none;">
       Message alert!
@@ -165,7 +166,7 @@
             <br>
             <p>{{(sub_msg.length+0)+"/200"}}
           </div>
-          <button class="btn btn-primary" type="submit"> Submit Post </button>
+          <button class="btn btn-secondary" type="submit"> Submit Post </button>
         </form>
 
         <hr>
@@ -179,7 +180,7 @@
 
 
       <div class = "col-sm-0 col-md-3" id="right-margin">
-
+        <img src="viking.gif" alt="CSU Vikes Logo" class="rounded mx-auto d-block" style="opacity: .25">
       </div>
     </div>
   </div>
