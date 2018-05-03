@@ -37,7 +37,7 @@
 	
 	// insert message into database table
 	$username = $_SESSION["username"];
-	$message = $_POST["msg"];
+	$message = strip_tags($_POST["msg"]);
 	
 	$stmt = $mysqli->prepare("INSERT INTO user_posts (username, message_text, message_timestamp) VALUES (?,?, CURRENT_TIMESTAMP)");
 	$stmt->bind_param('ss', $username, $message);
