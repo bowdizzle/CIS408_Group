@@ -1,5 +1,10 @@
 <?php
 
+if ($_POST["password"] != $_POST["password-confirm"]) {
+	echo 'Passwords do not match!';
+	exit();
+}
+
 // initialize the ini file 
 $ini = parse_ini_file("config.ini");
 

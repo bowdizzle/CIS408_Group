@@ -67,7 +67,6 @@
 					$data[] = $row;
 				}
 
-				// TODO: this is temporary to see if password checking works
 				// check password against stored password
 				$stored_password = $data[0]["password"];
 				if (password_verify($password, $stored_password)) {

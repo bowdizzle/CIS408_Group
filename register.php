@@ -72,7 +72,7 @@
 			</div>
 			<div class="form-group">
 				<label for="pwd">Confirm Password:</label>
-				<input type="password" class="form-control" id="pwd_confirm" required>
+				<input type="password" class="form-control" id="pwd_confirm" name="password-confirm" required>
 			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 			<button type="button" class="btn btn-default" action="index.php">Cancel</button>
