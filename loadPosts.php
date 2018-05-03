@@ -1,7 +1,5 @@
 <?php
 
-  #echo "BEGIN";
-
   $ini = parse_ini_file("config.ini");
   $limit = $_GET["limit"];
   $offset = $_GET["offset"];
@@ -19,7 +17,5 @@
   echo json_encode($return_arr);
 
   $mysql->close();
-
-  #echo "DONE!";
 
 ?>

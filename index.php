@@ -130,10 +130,9 @@
 
   <div class='jumbotron position-sticky fixed-top' id='site-header'>
       <h1 id='site-title'> <a href=#>Vikespace </a></h1>
-    </div>
+  </div>
+
   <div ng-app="" class = "container-fluid">
-
-
 
     <div id="message-alert" class="alert alert-dark alert-dismissable" role="alert" style="display: none;">
       Message alert!
@@ -176,13 +175,17 @@
 
       <div id = "feed-block" class = "col-sm-12 col-md-6">
 
+        <!-- Posts to be loaded later -->
+
       </div>
 
 
       <div class = "col-sm-0 col-md-3" id="right-margin">
         <img src="viking.gif" alt="CSU Vikes Logo" class="rounded mx-auto d-block" style="opacity: .25">
       </div>
+
     </div>
+    
   </div>
 
 </body>
