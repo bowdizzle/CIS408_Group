@@ -73,7 +73,7 @@
 					echo "<br>Succesfully logged in! <a href=index.php>Click here to return to the home page</a>";
 					$_SESSION['username'] = $username;
 					//Redirect to homepage after successful Login
-					// header('Location: index.php');
+					header('Location: index.php');
 				} else {
 					echo "<br>Incorrect log in";
 				}

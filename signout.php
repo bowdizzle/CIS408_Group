@@ -35,7 +35,7 @@
 			session_destroy();
 			echo "You have succesfully signed out!";
 			//Redirect to homepage after signout
-			//header('Location: index.php');
+			header('Location: index.php');
 		} else {
 			echo "Not signed in";
 		}
